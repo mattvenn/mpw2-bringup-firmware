@@ -7,6 +7,18 @@
 // Firmware routines
 // --------------------------------------------------------
 
+#define MPRJ_BASE 0x30000000
+#define REG0 ((volatile uint32_t*) (MPRJ_BASE + 0x00))
+#define REG1 ((volatile uint32_t*) (MPRJ_BASE + 0x04))
+#define REG2 ((volatile uint32_t*) (MPRJ_BASE + 0x08))
+#define REG3 ((volatile uint32_t*) (MPRJ_BASE + 0x0c))
+
+#define MPRJ_FB 0x30000100
+#define FB0 ((volatile uint32_t*) (MPRJ_FB + 0x00))
+#define FB1 ((volatile uint32_t*) (MPRJ_FB + 0x04))
+#define FB2 ((volatile uint32_t*) (MPRJ_FB + 0x08))
+#define FB3 ((volatile uint32_t*) (MPRJ_FB + 0x0c))
+
 void putchar(char c)
 {
 	if (c == '\n')
@@ -92,8 +104,22 @@ void main()
     delay(50000);
     reg_la0_data = 0;
 
+
+    // set the screen to be white
+    *REG2 = 0x00FF00FF;
+    *REG3 = 0x00000000;     
+
+    *FB0  = 0xFFFFFFFF;
+    *FB1  = 0xFFFFFFFF;
+    *FB2  = 0xFFFFFFFF;
+    *FB3  = 0xFFFFFFFF;     
+
+    *REG0 = 0x7FFF;     
+
     // no need for anything else as this design is free running.
     while (1) {
-        blink_long();
+        blink_short();
+        for( int i = 0; i < 0xFFFF; i += 0xFF)
+            *REG0 = i;
     }
 }

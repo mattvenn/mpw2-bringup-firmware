@@ -53,7 +53,7 @@ config_l = [
     C_DISABLE,   #13
     C_DISABLE,   #14
     C_DISABLE,   #15
-    C_DISABLE,   #16
+    C_USER_OUT,   #16
     C_USER_OUT,   #17 HSYNC
     C_USER_OUT,   #18 VSYNC
 ]
