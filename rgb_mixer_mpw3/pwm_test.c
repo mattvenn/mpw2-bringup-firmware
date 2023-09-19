@@ -81,12 +81,12 @@ void main()
 
     gpio_config_io();
 
-    // activate the project by setting the 1st bit of 2nd bank of LA
+    // activate the project by setting the bank 0 of LA
     reg_la0_iena = 0;
     reg_la0_oenb = 0;
     reg_la0_data = 0x01;  // 1st project
 
-    // reset design with 0bit of 1st bank of LA
+    // reset design with 0bit of bank 1 of LA
     reg_la1_iena = 0;
     reg_la1_oenb = 0;
     reg_la1_data = 1;
